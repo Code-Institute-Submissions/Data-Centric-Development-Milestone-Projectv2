@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <h1>Here is the recipe: </h1>
+    <br>
+    <ul>
+        {% for recipe in recipes %}
+        <h2>{{recipe.recipe_name}} by {{recipe.user_name}}</h2>
+            {% for ingredient in recipe.ingredients %}
+                <p>{{ingredient}}</p>
+            {% endfor %}
+        <p>{{recipe.preparation}}</p>
+        <br>
+        <h5>Allergens: {{recipe.allergens}}</h5>
+        <h5>Recipe Views: {{recipe.views}}</h5>
+        <h5>Recipe Upvotes: {{recipe.upvotes}}</h5>
+        {% endfor %}
+    </ul>
+    
+{% endblock %}
