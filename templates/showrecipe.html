@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <h1>Here is the recipe: </h1>
+    <br>
+    <ul>
+        {% for item in entries %}
+        <h1>{{item}}</h1>
+        {% endfor %}
+    </ul>
+    
+{% endblock %}

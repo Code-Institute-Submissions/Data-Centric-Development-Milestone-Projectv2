@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Add a recipe</h3>
+<div class="row">
+    <form action="{{ url_for('insert_recipe') }}" method="POST" class="col-sm-12" onclick="validateForm()" name="recipeform">
+        <div class="row">
+            <div class="row">
+                <div class="col-sm 12">
+                    <label>Cuisine Type</label>
+                    <select id="cuisine" name="cuisine_name">
+                        <option value="" disabled selected>Choose Cuisine Type</option>
+                        {% for cui in cuisine %}
+                            <option value="{{cui.cuisine_name}}">{{cui.cuisine_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label>Recipe Name</label>
+                <input type="text" id="recipe_name" name="recipe_name">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm 12">
+                <label>Cuisine Type</label>
+                <select id="user_name" name="user_name">
+                    <option value="" disabled selected>Choose User</option>
+                    {% for x in user %}
+                        <option value="{{x.user_name}}">{{x.user_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <p>Ingredient Name</p>
+                <label for="">List Ingredients</label>
+                <textarea name = "ingredient_1" id="ingredient_1" rows="1"></textarea>
+            </div>
+            <div class="col-sm-4">
+                <p>Quantity or Units (eg. 3 Cups, 2 Tbsp)</p>
+                <label for="">Quantity/Units</label>
+                <textarea name = "ingredient_qty_1" id="ingredient_qty_1" rows="1"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <label for="">Preparation Steps</label>
+                <textarea name = "preparation" id="preparation" rows="20" cols="60"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn" type="submit">Add Recipe
+             </button>
+        </div>
+        
+    </form>
+</div>
+
+{% endblock %}
