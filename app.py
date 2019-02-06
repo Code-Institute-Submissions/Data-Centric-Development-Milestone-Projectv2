@@ -21,10 +21,10 @@ def list_recipes():
     
 @app.route('/show_recipe/<recipe_id>/')
 def show_recipe(recipe_id):
-    recipe_id = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    entries = recipe_id.items()
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    counter = recipe['ingredient_counter']
     
-    return render_template('showrecipe.html', entries = entries)
+    return render_template('showrecipe.html', recipe = recipe, counter=counter)
     
 @app.route('/add_recipe')
 def add_recipe():

@@ -4,10 +4,44 @@
     
     <h1>Here is the recipe: </h1>
     <br>
-    <ul>
-        {% for item in entries %}
-        <h1>{{item}}</h1>
+    <h1>Recipe: {{recipe.recipe_name}} by {{recipe.user_name}}</h1>
+    <p>{{recipe.preparation}}</p>
+    <div class="ingredient-list">
+        <div><h1>Ingredient List</h1></div>
+        {% set count = counter|int %}
+        {% for i in range(1, count + 1, 1) %}
+            {% set statement = "recipe.ingredient_" + count|string %}
+            <div class="col-sm-4">{{ statement }}</div>
         {% endfor %}
-    </ul>
+        <p>{{recipe.ingredient_4}}</p>
+    </div>
+    
+ <script type="text/javascript">
+//     // $(document).ready(function() {
+//     $( window ).on( "load", function() {
+//         var counter = parseInt('{{counter}}') ;
+//         var count = 0
+//         console.log(counter);
+//         var string = 'ingredient_'
+//         for (i = 1; i <= counter; i++) {
+//             count += 1;
+//             var string_appended = string+count
+//             console.log(string_appended)
+//             $( '.ingredient-list' ).append('<div class="col-sm-4">{{'+string_appended+'}}</div>');
+//         }
+         
+//     });
+    
+    // $(document).ready(function() {
+    //     $("#addIngredientButton").click(function(){
+    //         count += 1;
+    //         $( '.ingredient-list' ).append('<div class="row ingredient"><p>Test</p></div>');
+    //         $( '.ingredient-list div:last').append('<div class="col-sm-4"><textarea name = "ingredient_'+count+'" id="ingredient_'+count+'" rows="1"></textarea></div> <div class="col-sm-4"><textarea name = "ingredient_qty_'+count+'" id="ingredient_qty_'+count+'" rows="1"></textarea></div>');
+    //         $('#ingredient_counter').text( parseInt($('#ingredient_counter').text()) + 1 );
+    //     }); 
+    // });
+    
+    
+</script>
     
 {% endblock %}
