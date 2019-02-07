@@ -7,13 +7,9 @@
     <ul>
         {% for recipe in recipes %}
         <h2>{{recipe.recipe_name}} by {{recipe.user_name}}</h2>
-        <!--
-            Ingredients need to go here
-        -->
         
-     
-        
-        
+       
+        <h3>Preparation</h3>
         <p>{{recipe.preparation}}</p>
         <br>
         <h5>Allergens: {{recipe.allergens}}</h5>
