@@ -2,66 +2,65 @@
 
 {% block content %}
 
-<div class="test" id="test">Test in code</div>
 <h3>Add a recipe</h3>
 <div class="row">
     <form action="{{ url_for('insert_recipe') }}" method="POST" class="col-sm-12" name="recipeform">
         <div class="row">
-            <div class="row">
-                <div class="col-sm 12">
-                    <label>Cuisine Type</label>
-                    <select id="cuisine" name="cuisine_name">
-                        <option value="" disabled selected>Choose Cuisine Type</option>
-                        {% for cui in cuisine %}
-                            <option value="{{cui.cuisine_name}}">{{cui.cuisine_name}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
+            <div class="input-field col s3">
+                <select id="cuisine" name="cuisine_name">
+                    <option value="" disabled selected>Choose Cuisine Type</option>
+                    {% for cui in cuisine %}
+                        <option value="{{cui.cuisine_name}}">{{cui.cuisine_name}}</option>
+                    {% endfor %}
+                </select>
+                <label>Cuisine Type</label>
             </div>
-            <div class="col-sm-12">
+            <div class="input-field col s3">
                 <label>Recipe Name</label>
                 <input type="text" id="recipe_name" name="recipe_name">
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm 12">
-                <label>Cuisine Type</label>
+           
+            <div class="input-field col s3">
                 <select id="user_name" name="user_name">
                     <option value="" disabled selected>Choose User</option>
                     {% for x in user %}
                         <option value="{{x.user_name}}">{{x.user_name}}</option>
                     {% endfor %}
                 </select>
+                <label>User Name</label>
             </div>
+        
         </div>
         <div class="ingredient_count"><textarea name="ingredient_counter" id="ingredient_counter" style="display:none;">1</textarea></div>
         <div class="ingredient-list" id="ingredient-list">
             <div class="row ingredient">
-                <div class="col-sm-4">
-                    <p>Ingredient Name</p>
-                    <label for="">List Ingredients</label>
-                    <textarea name = "ingredient_1" id="ingredient_1" rows="1"></textarea>
-                </div>
-                <div class="col-sm-4">
-                    <p>Quantity or Units (eg. 3 Cups, 2 Tbsp)</p>
-                    <label for="">Quantity/Units</label>
-                    <textarea name = "ingredient_qty_1" id="ingredient_qty_1" rows="1"></textarea>
+                <div class="col s6 ingredient-row">
+                    <div class="input-field col s6">
+                        <input placeholder="First Ingredient" type="text" name = "ingredient_1" id="ingredient_1">
+                        <label for="">List Ingredients</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input placeholder="Quantity" type="text" name = "ingredient_qty_1" id="ingredient_qty_1">
+                        <label class="active" for="">Quantity or Units (eg. 3 Cups, 2 Tbsp)</label>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <button type="button" class="btn btn-primary" id="addIngredientButton">Add Ingredient</button>
-            </div>
-            <div class="col-sm-6">
-                <button type="button" class="btn btn-primary" id="removeIngredientButton">Remove Ingredient</button>
+        <div class="col s12">
+            <div class="row col s6 center">
+                 <div class="input-field col s6">
+                    <button type="button" class="waves-effect waves-light btn-small" id="addIngredientButton">Add Ingredient</button>
+                </div>
+                <div class="input-field col s6">
+                    <button type="button" class="waves-effect waves-light btn-small" id="removeIngredientButton">Remove Ingredient</button>
+                </div>
             </div>
         </div>
-
+        
         <div class="row">
             <div class="col-sm-12">
                 <label for="">Preparation Steps</label>
-                <textarea name = "preparation" id="preparation" rows="5" cols="60"></textarea>
+                <textarea class="materialize-textarea" name = "preparation" id="preparation" rows="5" cols="60"></textarea>
             </div>
         </div>
         <div class="row">
@@ -73,21 +72,22 @@
 </div>
 
 <script type="text/javascript">
-    //Testing to see if I can get a count or divs with class ingredient
-    //var ingredientCount = document.getElementsByClassName("ingredient").length;
-    //console.log(ingredientCount);
-    
     var count = 1;
     $(document).ready(function() {
+        $('select').formSelect();
         $("#addIngredientButton").click(function(){
             count += 1;
-            $( '.ingredient-list' ).append('<div class="row ingredient"><p>Test</p></div>');
-            $( '.ingredient-list div:last').append('<div class="col-sm-4"><textarea name = "ingredient_'+count+'" id="ingredient_'+count+'" rows="1"></textarea></div> <div class="col-sm-4"><textarea name = "ingredient_qty_'+count+'" id="ingredient_qty_'+count+'" rows="1"></textarea></div>');
+            $( '.ingredient-list' ).append('<div class="row ingredient"></div>');
+            $( '.ingredient' ).append('<div class="col s6 ingredient-row"></div>');
+            $( '.ingredient div:last').append('<div class="input-field col s6"><input placeholder="Add Ingredient" name = "ingredient_'+count+'" id="ingredient_'+count+'" rows="1"></div> <div class="input-field col s6"><input placeholder="Add Quantity" name = "ingredient_qty_'+count+'" id="ingredient_qty_'+count+'" rows="1"></div>');
             $('#ingredient_counter').text( parseInt($('#ingredient_counter').text()) + 1 );
         }); 
     });
     
-    
+// <div class="input-field col s6">
+//                         <input placeholder="First Ingredient" type="text" name = "ingredient_1" id="ingredient_1">
+//                         <label for="">List Ingredients</label>
+//                     </div>    
 //#ingredient-list
     
 </script>
