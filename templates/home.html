@@ -1,7 +1,52 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="row">
+    <div class="container center-align">
+        <h1>Recipe Trove</h1>
+        <h5>Where your cooking treasures are stored</h5>
+    </div>
+</div>    
     
-    <h1>Hello World</h1>
+<div class="row"> 
+    <div class="col s6 offset-s3">
+        <div class="carousel carousel-slider center">
+            <div class="carousel-fixed-item center">
+                <a class="waves-effect waves-light  deep-purple btn">button</a>
+            </div>
+            {% for recipe in recipes %}
+            <div class="carousel-item red white-text" href="#">
+                <h2>{{ recipe.recipe_name }}</h2>
+                <p class="white-text">shared by {{ recipe.user_name }}</p>
+                {% if recipe.recipe_image %}
+                    <img src="{{ recipe.recipe_image }}">
+                {% else %}
+                    <img src="{{ url_for('static', filename='images/recipe.png') }}">
+                {% endif %}
+            </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>   
+<script>
+    $(document).ready(function(){
+        $('.carousel').carousel();
+    });
+    
+    $('.carousel').carousel();
+        setInterval(function() {
+        $('.carousel').carousel('next');
+    }, 5000); // every 5 seconds
+    
+    $('.carousel.carousel-slider').carousel({
+        indicators: true
+     });
+     
+    $('.btn').on('click touchstart', e => {
+        window.open("{{url_for('list_recipes')}}","_self");
+    })
+     
+</script>
     
 {% endblock %}

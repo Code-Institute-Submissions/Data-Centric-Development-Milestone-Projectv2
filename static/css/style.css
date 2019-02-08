@@ -11,3 +11,14 @@
     padding: 5px !important;
     text-align: center !important;
 }
+
+.ingredient {
+    margin: 0px !important;
+}
+
+
+.ingredient-row .input-field {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
