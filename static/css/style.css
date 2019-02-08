@@ -1,0 +1,13 @@
+.card-title {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+}
+
+.card-panel {
+    opacity: 0.8;
+}
+
+.card .card-image .card-title {
+    padding: 5px !important;
+    text-align: center !important;
+}

@@ -2,20 +2,34 @@
 
 {% block content %}
     
-    <h1>Here is the recipe: </h1>
+    <h1>Here are the recipes: </h1>
     <br>
-    <ul>
+    <div class="container">
+        <div class="row"> 
         {% for recipe in recipes %}
-        <h2>{{recipe.recipe_name}} by {{recipe.user_name}}</h2>
-        
-       
-        <h3>Preparation</h3>
-        <p>{{recipe.preparation}}</p>
-        <br>
-        <h5>Allergens: {{recipe.allergens}}</h5>
-        <h5>Recipe Views: {{recipe.views}}</h5>
-        <h5>Recipe Upvotes: {{recipe.upvotes}}</h5>
+            <div class="col s4">
+                <div class="card">
+                    <a href="{{url_for('show_recipe', recipe_id=recipe._id)}}">
+                    <div class="card-image">
+                        <!-- <img src="https://source.unsplash.com/400x300/?recipe,food"> -->
+                        {% if recipe.recipe_image %}
+                        <img src="{{ recipe.recipe_image }}">
+                        {% else %}
+                        <img src="{{ url_for('static', filename='images/recipe.png') }}">
+                        {% endif %}
+                        <span class="card-title"> {{recipe.recipe_name}} </span>
+                    </div>
+                    </a>
+                    <div class="card-content">
+                        <p>Uploaded by {{ recipe.user_name }}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{{url_for('show_recipe', recipe_id=recipe._id)}}">View or Edit Recipe</a>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
+        </div>  
+    </div>
     
 {% endblock %}

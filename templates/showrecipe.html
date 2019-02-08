@@ -1,17 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col s12 center-align">
+            <h1 class="card-panel teal lighten-2">{{recipe.recipe_name}}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <blockquote>Recipe added by {{recipe.user_name}}</blockquote>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6 recipe-image">
+            Image Goes Here
+        </div>
+        <div class="col s6 recipe-content">
+            <h5>Ingredients Required:</h5>
+            {% for ing in ingredients %}
+                <p>{{ ing }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <h5>Recipe Preparation</h5>
+            <p>{{recipe.preparation}}</p>
+        </div>
+    </div>
+</div>    
     
-    <h1>Here is the recipe: </h1>
+    
+    
     <br>
-    <h1>Recipe: {{recipe.recipe_name}} by {{recipe.user_name}}</h1>
-    <h3>Ingredients Required:</h3>
-    {% for ing in ingredients %}
-    <p>{{ ing }}</p>
-    {% endfor %}
-    <br>
-    <h3>Recipe Preparation</h3>
-    <p>{{recipe.preparation}}</p>
+    
 
     
  <script type="text/javascript">
