@@ -7,26 +7,35 @@
             <h1 class="card-panel teal lighten-2">{{recipe.recipe_name}}</h1>
         </div>
     </div>
-    <div class="row">
-        <div class="col s12">
-            <blockquote>Recipe added by {{recipe.user_name}}</blockquote>
-        </div>
-    </div>
+   
     <div class="row">
         <div class="col s6 recipe-image">
-            Image Goes Here
+            <img class="z-depth-3" src="{{ recipe.recipe_image }}"></img>
+            <blockquote>Recipe added by {{recipe.user_name}}</blockquote>
         </div>
-        <div class="col s6 recipe-content">
-            <h5>Ingredients Required:</h5>
-            {% for ing in ingredients %}
-                <p>{{ ing }}</p>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s6 offset-s3">
-            <h5>Recipe Preparation</h5>
-            <p>{{recipe.preparation}}</p>
+        <div class="col s6">
+            <div class="card">
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card-panel red">
+                            <span class="white-text">
+                                <span class="card-title red">Ingredients:</span>
+                                {% for ing in ingredients %}
+                                <p>{{ ing }}</p>
+                                {% endfor %}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <div class="card-panel red">
+                            <span class="white-text">
+                                <span class="card-title red">Recipe Preparation</span>
+                                <p>{{recipe.preparation}}</p>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>    

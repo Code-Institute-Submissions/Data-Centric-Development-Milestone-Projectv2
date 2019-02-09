@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% for result in search_result %}
+    <a href="{{url_for('show_recipe', recipe_id=result._id)}}">
+    <p>{{result.recipe_name}} by {{result.user_name}}</p>
+    </a>
+{% endfor %}
+{% endblock %}

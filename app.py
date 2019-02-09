@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, redirect, url_for, request
 from flask_pymongo import PyMongo
-from pymongo import MongoClient
+#from pymongo import MongoClient
 from bson import ObjectId
 
 app = Flask(__name__)
@@ -38,6 +38,31 @@ def insert_recipe():
     recipes = mongo.db.recipes
     recipes.insert_one(request.form.to_dict())
     return redirect(url_for('list_recipes'))
+    
+@app.route('/search', methods=['POST', 'GET'])
+def search():
+    return render_template('search.html', recipes = mongo.db.recipes.find(), cuisine=mongo.db.cuisine.find(), user=mongo.db.user.find())
+
+@app.route('/result', methods=['POST'])
+def result():
+    query = {}
+    if request.method == 'POST':
+        try:
+            if request.form['user_name'] != 'None':
+                user = request.form['user_name']
+                query['user_name'] = user
+        except:
+            pass
+        try:
+            if request.form['cuisine_name']  != 'None':
+                cuisine = request.form['cuisine_name']
+                query['cuisine_name'] = cuisine
+        except:
+            pass
+    print(query)
+    search_result = mongo.db.recipes.find(query)
+    
+    return render_template('result.html', recipes = mongo.db.recipes.find(), search_result = search_result)
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), port=int(os.environ.get('PORT')), debug=True)

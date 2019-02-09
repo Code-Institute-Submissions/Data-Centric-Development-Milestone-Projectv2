@@ -2,80 +2,84 @@
 
 {% block content %}
 
-<h3>Add a recipe</h3>
-<div class="row">
-    <form action="{{ url_for('insert_recipe') }}" method="POST" class="col-sm-12" name="recipeform">
-        <div class="row">
-            <div class="input-field col s3">
-                <select id="cuisine" name="cuisine_name">
-                    <option value="" disabled selected>Choose Cuisine Type</option>
-                    {% for cui in cuisine %}
-                        <option value="{{cui.cuisine_name}}">{{cui.cuisine_name}}</option>
-                    {% endfor %}
-                </select>
-                <label>Cuisine Type</label>
-            </div>
-            <div class="input-field col s3">
-                <label>Recipe Name</label>
-                <input type="text" id="recipe_name" name="recipe_name">
-            </div>
-           
-            <div class="input-field col s3">
-                <select id="user_name" name="user_name">
-                    <option value="" disabled selected>Choose User</option>
-                    {% for x in user %}
-                        <option value="{{x.user_name}}">{{x.user_name}}</option>
-                    {% endfor %}
-                </select>
-                <label>User Name</label>
-            </div>
-        
+<div class="container">
+    <div class="row">
+        <div class="col s12 center-align">
+            <h1 class="card-panel red white-text">Add a Recipe</h1>
         </div>
-        <div class="ingredient_count"><textarea name="ingredient_counter" id="ingredient_counter" style="display:none;" >1</textarea></div>
-        <div class="ingredient-list" id="ingredient-list">
-            <div class="row ingredient">
-                <div class="col s6 ingredient-row">
-                    <div class="input-field col s6">
-                        <input placeholder="First Ingredient" type="text" name = "ingredient_1" id="ingredient_1">
-                        <label for="">List Ingredients</label>
+    </div>
+    <div class="row">
+        <form action="{{ url_for('insert_recipe') }}" method="POST" class="col-sm-12" name="recipeform">
+            <div class="row">
+                <div class="input-field col s4">
+                    <select id="cuisine" name="cuisine_name">
+                        <option value="" disabled selected>Choose Cuisine Type</option>
+                        {% for cui in cuisine %}
+                            <option value="{{cui.cuisine_name}}">{{cui.cuisine_name}}</option>
+                        {% endfor %}
+                    </select>
+                    <label>Cuisine Type</label>
+                </div>
+                <div class="input-field col s4">
+                    <label>Recipe Name</label>
+                    <input type="text" id="recipe_name" name="recipe_name">
+                </div>
+               
+                <div class="input-field col s4">
+                    <select id="user_name" name="user_name">
+                        <option value="" disabled selected>Choose User</option>
+                        {% for x in user %}
+                            <option value="{{x.user_name}}">{{x.user_name}}</option>
+                        {% endfor %}
+                    </select>
+                    <label>User Name</label>
+                </div>
+            </div>
+            <div class="ingredient_count"><textarea name="ingredient_counter" id="ingredient_counter" style="display:none;" >1</textarea></div>
+            <div class="ingredient-list" id="ingredient-list">
+                <div class="row ingredient">
+                    <div class="col s10 ingredient-row offset-s1">
+                        <div class="input-field col s6">
+                            <input placeholder="First Ingredient" type="text" name = "ingredient_1" id="ingredient_1">
+                            <label for="">List Ingredients</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input placeholder="Quantity" type="text" name = "ingredient_qty_1" id="ingredient_qty_1">
+                            <label class="active" for="">Quantity or Units (eg. 3 Cups, 2 Tbsp)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12">
+                <div class="row col s12 center">
+                     <div class="input-field col s6">
+                        <button type="button" class="waves-effect waves-light btn-small" id="addIngredientButton">Add Ingredient</button>
                     </div>
                     <div class="input-field col s6">
-                        <input placeholder="Quantity" type="text" name = "ingredient_qty_1" id="ingredient_qty_1">
-                        <label class="active" for="">Quantity or Units (eg. 3 Cups, 2 Tbsp)</label>
+                        <button type="button" class="waves-effect waves-light btn-small" id="removeIngredientButton">Remove Ingredient</button>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col s12">
-            <div class="row col s6 center">
-                 <div class="input-field col s6">
-                    <button type="button" class="waves-effect waves-light btn-small" id="addIngredientButton">Add Ingredient</button>
-                </div>
-                <div class="input-field col s6">
-                    <button type="button" class="waves-effect waves-light btn-small" id="removeIngredientButton">Remove Ingredient</button>
+            <div class="row">
+                 <div class="input-field col s8 offset-s2">
+                    <label>Recipe Image Link (You can upload images to websites like <a href="http://tinypic.com/">tinypic.com</a>)</label>
+                    <input  placeholder="Example: http://i68.tinypic.com/2bdrlt.jpg" type="text" id="recipe_image" name="recipe_image">
                 </div>
             </div>
-        </div>
-        <div class="row">
-             <div class="input-field col s6">
-                <label>Recipe Image Link (You can upload images to websites like <a href="http://tinypic.com/">tinypic.com</a>)</label>
-                <input  placeholder="Example: http://i68.tinypic.com/2bdrlt.jpg" type="text" id="recipe_image" name="recipe_image">
+            <div class="row">
+                <div class="col s8 offset-s2 center">
+                    <label for="">Preparation Steps (Press enter to add new line while entering steps)</label>
+                    <textarea class="materialize-textarea" name = "preparation" id="preparation" rows="5" cols="60"></textarea>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col s6 center">
-                <label for="">Preparation Steps</label>
-                <textarea class="materialize-textarea" name = "preparation" id="preparation" rows="5" cols="60"></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col sm3">
-                <button class="btn" type="submit">Add Recipe</button>
+            <div class="row">
+                <div class="col sm3">
+                    <button class="btn" type="submit">Add Recipe</button>
+                </div>
             </div>
             
-        </div>
-        
-    </form>
+        </form>
+    </div>
 </div>
 
 <script type="text/javascript">

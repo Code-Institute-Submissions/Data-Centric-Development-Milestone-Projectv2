@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    
+<div class="container">
+    <div class="row">
+        <div class="col s12 center-align">
+            <h1 class="card-panel red white-text">Search for a Recipe</h1>
+        </div>
+    </div>
+    <div class="row">
+        <form action="{{ url_for('result') }}" method="POST" class="col-sm-12">
+            <div class="row">
+                <div class="input-field col s4">
+                    <select id="user_name" name="user_name">
+                        <option value="None" disabled selected>Search by User</option>
+                        {% for x in user %}
+                            <option value="{{x.user_name}}">{{x.user_name}}</option>
+                        {% endfor %}
+                    </select>
+                    <label>User Name</label>
+                </div>
+                <div class="input-field col s4">
+                    <select id="cuisine_name" name="cuisine_name">
+                        <option value="None" disabled selected>Search by Cuisine</option>
+                        {% for x in cuisine %}
+                            <option value="{{x.cuisine_name}}">{{x.cuisine_name}}</option>
+                        {% endfor %}
+                    </select>
+                    <label>Cuisine Type</label>
+                </div>
+                <div class="col s4">
+                    <button class="btn" type="submit">Search Recipes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>  
+
+<script>
+    $(document).ready(function(){
+        $('select').formSelect();
+    });
+</script>
+
+{% endblock %}
