@@ -9,10 +9,17 @@
     </div>
    
     <div class="row">
-        <div class="col s6 recipe-image">
-            <img class="z-depth-3" src="{{ recipe.recipe_image }}"></img>
-            <blockquote>Recipe added by {{recipe.user_name}}</blockquote>
+        <div class="col s6">
+            <div class="col s12 recipe-image">
+                <img class="z-depth-3" src="{{ recipe.recipe_image }}"></img>
+                <blockquote>Recipe added by {{recipe.user_name}}</blockquote>
+            </div>
+            <div class="col s12">
+                    <img class="z-depth-3" src="{{ recipe.recipe_image }}"></img>
+                    <blockquote>Allergens: {{recipe.allergens}}</blockquote>
+            </div>
         </div>
+        
         <div class="col s6">
             <div class="card">
                 <div class="row">

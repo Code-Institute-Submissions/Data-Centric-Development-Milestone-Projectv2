@@ -31,12 +31,16 @@ def show_recipe(recipe_id):
     
 @app.route('/add_recipe')
 def add_recipe():
-    return render_template('addrecipe.html', cuisine=mongo.db.cuisine.find(), user=mongo.db.user.find())
+    return render_template('addrecipe.html', cuisine=mongo.db.cuisine.find(), user=mongo.db.user.find(), allergen = mongo.db.allergens.find())
 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
-    recipes = mongo.db.recipes
-    recipes.insert_one(request.form.to_dict())
+    if request.method == 'POST':
+        result = request.form.to_dict()
+        allergen_result = request.form.getlist('allergens')
+        result['allergens'] = ', '.join(allergen_result)
+        recipes = mongo.db.recipes
+        recipes.insert_one(result)
     return redirect(url_for('list_recipes'))
     
 @app.route('/search', methods=['POST', 'GET'])
