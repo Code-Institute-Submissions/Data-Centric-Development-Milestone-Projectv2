@@ -38,7 +38,13 @@ def insert_recipe():
     if request.method == 'POST':
         result = request.form.to_dict()
         allergen_result = request.form.getlist('allergens')
+        non_string = request.form.get('preparation')
+        preparation_result = str(request.form.get('preparation'))
+        preparation_string = preparation_result.split("\r\n")
+        result['preparation'] = ', '.join(preparation_string)
         result['allergens'] = ', '.join(allergen_result)
+        print(result['preparation'])
+        print(type(result['preparation']))
         recipes = mongo.db.recipes
         recipes.insert_one(result)
     return redirect(url_for('list_recipes'))

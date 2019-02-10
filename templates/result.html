@@ -2,10 +2,36 @@
 
 {% block content %}
 
+ <div class="container">
+        <div class="row">
+            <div class="col s12 center-align">
+                <h1 class="card-panel red white-text">Recipe Search Result</h1>
+            </div>
+        </div>
+        <div class="row"> 
+        <ul class="collection">
+            {% for result in search_result %}
+            <li class="collection-item avatar">
+                <a href="{{url_for('show_recipe', recipe_id=result._id)}}">
+                    <img src="{{ result.recipe_image }}" alt="" class="circle">
+                    <span class="title">{{ result.recipe_name }}</span>
+                    <p> Short description here <br>
+                     Allergens: {{ result.allergens }}
+                    </p>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        
+        <!--{% for result in search_result %}-->
+        <!--    <a href="{{url_for('show_recipe', recipe_id=result._id)}}">-->
+        <!--    <p>{{result.recipe_name}} by {{result.user_name}}</p>-->
+        <!--    </a>-->
+        <!--{% endfor %}-->
+        </div>  
+    </div>
 
-{% for result in search_result %}
-    <a href="{{url_for('show_recipe', recipe_id=result._id)}}">
-    <p>{{result.recipe_name}} by {{result.user_name}}</p>
-    </a>
-{% endfor %}
+
 {% endblock %}
+
+

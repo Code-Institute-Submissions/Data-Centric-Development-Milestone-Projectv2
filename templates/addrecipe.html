@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="row">
-        <form action="{{ url_for('insert_recipe') }}" method="POST" class="col-sm-12" name="recipeform">
+        <form action="{{ url_for('insert_recipe') }}" method="POST" class="col-sm-12" name="recipeform" id="recipeform">
             <div class="row">
                 <div class="input-field col s4">
                     <select id="cuisine" name="cuisine_name">
@@ -61,22 +61,25 @@
                 </div>
             </div>
             <div class="row">
-                 <div class="input-field col s8 offset-s2">
+                 <div class="input-field col s10 offset-s1">
                     <label>Recipe Image Link (You can upload images to websites like <a href="http://tinypic.com/">tinypic.com</a>)</label>
-                    <input  placeholder="Example: http://i68.tinypic.com/2bdrlt.jpg" type="text" id="recipe_image" name="recipe_image">
+                    <input placeholder="Example: http://i68.tinypic.com/2bdrlt.jpg" type="text" id="recipe_image" name="recipe_image">
                 </div>
             </div>
             <div class="row">
-                <div class="col s8 offset-s2 center">
-                    <label for="">Preparation Steps (Press enter to add new line while entering steps)</label>
-                    <textarea class="materialize-textarea" name = "preparation" id="preparation" rows="5" cols="60"></textarea>
+                <div class="col s10 offset-s1">
+                    <label for="">Preparation Steps</label>
+                    <textarea placeholder="Press enter after each step to create a new line" class="materialize-textarea" name = "preparation" id="preparation" rows="5" cols="60"></textarea>
                 </div>
             </div>
-            
-            <!-- TESTING ALLERGEN CHECKBOXES -->
-            
             <div class="row">
-                <div class="col s12 center">
+                <div class="col s10 offset-s1">
+                    <label for="">Recipe Description</label>
+                    <textarea placeholder="A short description of the Recipe" class="materialize-textarea" name = "description" id="description" rows="5" cols="60"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
                     <p>Please select any potential allergens in the recipe:</p>
                 </div>
                 <div class="input-field col s12">
@@ -88,9 +91,6 @@
                     <label>Selected Allergens</label>
                 </div>
             </div>
-            
-            <!-- End of ALLERGEN test -->
-            
             <div class="row">
                 <div class="col s3">
                     <button class="btn" type="submit">Add Recipe</button>
@@ -125,6 +125,7 @@
         });
         
     });
+    
     
 </script>
 

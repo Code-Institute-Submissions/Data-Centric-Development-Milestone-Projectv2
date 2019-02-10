@@ -13,10 +13,11 @@
             <div class="col s12 recipe-image">
                 <img class="z-depth-3" src="{{ recipe.recipe_image }}"></img>
                 <blockquote>Recipe added by {{recipe.user_name}}</blockquote>
-            </div>
-            <div class="col s12">
-                    <img class="z-depth-3" src="{{ recipe.recipe_image }}"></img>
-                    <blockquote>Allergens: {{recipe.allergens}}</blockquote>
+                {% if recipe.allergens %}
+                <blockquote>Allergens: {{recipe.allergens}}</blockquote>
+                {% else %}
+                <blockquote>Allergens: None</blockquote>
+                {% endif %}
             </div>
         </div>
         
@@ -26,9 +27,17 @@
                     <div class="col s12">
                         <div class="card-panel red">
                             <span class="white-text">
-                                <span class="card-title red">Ingredients:</span>
+                                <p><span class="card-title red">Recipe Description</span></p>
+                                <p>{{ recipe.description }}</p>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <div class="card-panel red">
+                            <span class="white-text">
+                                <p><span class="card-title red">Ingredients: </span></p>
                                 {% for ing in ingredients %}
-                                <p>{{ ing }}</p>
+                                {{ ing }}<br />
                                 {% endfor %}
                             </span>
                         </div>
@@ -36,8 +45,12 @@
                     <div class="col s12">
                         <div class="card-panel red">
                             <span class="white-text">
-                                <span class="card-title red">Recipe Preparation</span>
-                                <p>{{recipe.preparation}}</p>
+                                <p><span class="card-title red">Recipe Preparation</span></p>
+                                {% set preparationList = recipe.preparation.split(',') %}
+                                {% for item in preparationList %}
+                                {{ item }} <br />
+                                {% endfor %}
+                                <!--<p>{{recipe.preparation | safe}}</p>-->
                             </span>
                         </div>
                     </div>
