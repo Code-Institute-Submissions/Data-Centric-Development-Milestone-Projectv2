@@ -27,6 +27,15 @@ def show_recipe(recipe_id):
     for x in range(1, counter, 1):
         ingredient_list.append(recipe['ingredient_' + str(x)] + ': ' + recipe['ingredient_qty_' + str(x)])
     
+    try:
+        views = int(recipe['views'])
+        views += 1
+        recipe['views'] = views
+        recipes = mongo.db.recipes
+        recipes.update_one({"_id": ObjectId(recipe_id)},{ '$set': {'views':views}})
+    except:
+        recipes = mongo.db.recipes
+        recipes.update_one({"_id": ObjectId(recipe_id)},{ '$set': {'views':'1'}})
     return render_template('showrecipe.html', recipe = recipe, counter=counter, ingredients = ingredient_list)
     
 @app.route('/add_recipe')
