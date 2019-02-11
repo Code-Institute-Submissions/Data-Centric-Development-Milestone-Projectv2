@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 center-align">
+            <h1 class="card-panel red white-text">Edit Recipe</h1>
+        </div>
+    </div>
+    <div class="row">
+        <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method="POST" class="col-sm-12" name="recipeform" id="recipeform">
+            <div class="row">
+                <div class="input-field col s4">
+                    <select id="cuisine" name="cuisine_name">
+                        <option value="" disabled selected>Choose Cuisine Type</option>
+                        {% for cui in cuisine %}
+                            {% if cui.cuisine_name == recipe.cuisine_name %}
+                            <option value="{{cui.cuisine_name}}" selected>{{cui.cuisine_name}}</option>
+                            {% else %}
+                            <option value="{{cui.cuisine_name}}">{{cui.cuisine_name}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <label>Cuisine Type</label>
+                </div>
+                <div class="input-field col s4">
+                    <label>Recipe Name</label>
+                    <input type="text" id="recipe_name" name="recipe_name" value="{{recipe.recipe_name}}">
+                </div>
+               
+                <div class="input-field col s4">
+                    <select id="user_name" name="user_name">
+                        <option value="" disabled selected>Choose User</option>
+                        {% for x in user %}
+                            {% if x.user_name == recipe.user_name %}
+                            <option value="{{x.user_name}}" selected>{{x.user_name}}</option>
+                            {% else %}
+                            <option value="{{x.user_name}}">{{x.user_name}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <label>User Name</label>
+                </div>
+            </div>
+            <div class="ingredient_count"><textarea name="ingredient_counter" id="ingredient_counter" style="display:none;" >1</textarea></div>
+            <div class="ingredient-list" id="ingredient-list">
+                <div class="row ingredient">
+                    {% for x in range(1, counter, 1) %}
+                        
+                        <div class="col s10 ingredient-row offset-s1">
+                            <div class="input-field col s6">
+                                <input placeholder="First Ingredient" type="text" name = "ingredient_{{x}}" id="ingredient_{{x}}" value="{{ingredient_list[x - 1]}}">
+                                {% if x == 1 %}
+                                <label for="">List Ingredients</label>
+                                {% endif %}
+                            </div>
+                            <div class="input-field col s6">
+                                <input placeholder="Quantity" type="text" name = "ingredient_qty_{{x}}" id="ingredient_qty_{{x}}" value="{{ingredient_qty_list[x - 1]}}">
+                                {% if x == 1 %}
+                                <label class="active" for="">Quantity or Units (eg. 3 Cups, 2 Tbsp)</label>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col s12">
+                <div class="row col s12 center">
+                     <div class="input-field col s6">
+                        <button type="button" class="waves-effect waves-light btn-small" id="addIngredientButton">Add Ingredient</button>
+                    </div>
+                    <div class="input-field col s6">
+                        <button type="button" class="waves-effect waves-light btn-small" id="removeIngredientButton">Remove Ingredient</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                 <div class="input-field col s10 offset-s1">
+                    <label>Recipe Image Link (You can upload images to websites like <a href="http://tinypic.com/">tinypic.com</a>)</label>
+                    <input placeholder="Example: http://i68.tinypic.com/2bdrlt.jpg" type="text" id="recipe_image" name="recipe_image" value="{{recipe.recipe_image}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    {% set preparationList = recipe.preparation.split(',') %}
+                    <label for="">Preparation Steps</label>
+                    <textarea placeholder="Press enter after each step to create a new line" class="materialize-textarea" name = "preparation" id="preparation" rows="5" cols="60">{{recipe.preparation | replace(", ", "\r\n")}}</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    <label for="">Recipe Description</label>
+                    <textarea placeholder="A short description of the Recipe" class="materialize-textarea" name = "description" id="description" rows="5" cols="60">{{ recipe.description }}</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s10 offset-s1">
+                    <p>Please select any potential allergens in the recipe:</p>
+                </div>
+                <div class="input-field col s10 offset-s1">
+                    <select name="allergens" id="allergens" multiple>
+                    {% for entry in allergen %}
+                        {% if entry.allergen in recipe.allergens %}
+                        <option value="{{entry.allergen}}" selected>{{entry.allergen}}</option>
+                        {% else %}
+                        <option value="{{entry.allergen}}">{{entry.allergen}}</option>
+                        {% endif %}
+                    {% endfor %}
+                    </select>
+                    <label>Selected Allergens</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4 offset-s4 center">
+                    <button class="btn" type="submit">Submit Change</button>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var count = parseInt("{{counter}}") - 1;
+    $(document).ready(function() {
+        $('select').formSelect();
+        // Add ingredient and ingredient qty row when button is clicked
+        $("#addIngredientButton").click(function(){
+            count += 1;
+            $( '.ingredient-list' ).append('<div class="row ingredient"></div>');
+            $('.ingredient-list div:last-child').append('<div class="col s10 ingredient-row offset-s1"></div>')
+            $( '.ingredient-list div:last' ).append('<div class="input-field col s6"><input placeholder="Add Ingredient" name = "ingredient_'+count+'" id="ingredient_'+count+'" rows="1"></div> <div class="input-field col s6"><input placeholder="Add Quantity" name = "ingredient_qty_'+count+'" id="ingredient_qty_'+count+'" rows="1"></div></div>');
+            $('#ingredient_counter').text(parseInt(count));
+            
+        });
+        
+        //Remove ingredient row when button is clicked
+        $("#removeIngredientButton").click(function() {
+            if (count > 1) {
+                 count -= 1;
+                 $('.ingredient-list .ingredient:last').remove(); 
+                 $('#ingredient_counter').text(parseInt(count));
+              }                    
+           
+        });
+        
+    });
+    
+    
+</script>
+
+{% endblock %}
+
