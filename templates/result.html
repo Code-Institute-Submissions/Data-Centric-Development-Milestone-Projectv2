@@ -2,29 +2,40 @@
 
 {% block content %}
 
- <div class="container">
-        <div class="row">
-            <div class="col s12 center-align">
-                <h1 class="card-panel red white-text">Recipe Search Result</h1>
+<div class="container">
+    <div class="row">
+        <div class="col s12 center-align">
+            <h1 class="card-panel red white-text">Recipe Search Result</h1>
+        </div>
+    </div>
+    <div class="row"> 
+    {% for recipe in search_result %}
+        <div class="col s6 l4">
+            <div class="card small">
+                <a href="{{url_for('show_recipe', recipe_id=recipe._id)}}">
+                <div class="card-image">
+                    <!-- <img src="https://source.unsplash.com/400x300/?recipe,food"> -->
+                    {% if recipe.recipe_image %}
+                    <img src="{{ recipe.recipe_image }}">
+                    {% else %}
+                    <img src="{{ url_for('static', filename='images/recipe.png') }}">
+                    {% endif %}
+                    <span class="card-title dark-background"> {{recipe.recipe_name}} </span>
+                </div>
+                </a>
+                <div class="card-content">
+                    <p>Uploaded by {{ recipe.user_name }}</p>
+                </div>
+                <div class="card-action">
+                    <a href="{{url_for('show_recipe', recipe_id=recipe._id)}}">View or Edit Recipe</a>
+                </div>
             </div>
         </div>
-        <div class="row"> 
-            <ul class="collection">
-                {% for result in search_result %}
-                <li class="collection-item avatar">
-                    <a href="{{url_for('show_recipe', recipe_id=result._id)}}">
-                        <img src="{{ result.recipe_image }}" alt="" class="circle">
-                        <span class="title">{{ result.recipe_name }}</span>
-                        <p> Short description here <br>
-                         Allergens: {{ result.allergens }}
-                        </p>
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        
-        </div>  
-    </div>
+    {% endfor %}
+    </div>  
+</div>
+    
+    
 
 
 {% endblock %}

@@ -10,9 +10,9 @@
         </div>
     </div>
     <div class="row">
-        <form action="{{ url_for('result') }}" method="POST" class="col-sm-12">
+        <form action="{{ url_for('result') }}" method="POST" class="col s12">
             <div class="row">
-                <div class="input-field col s4">
+                <div class="input-field col s6">
                     <select id="user_name" name="user_name">
                         <option value="None" disabled selected>Search by User</option>
                         {% for x in user %}
@@ -21,7 +21,7 @@
                     </select>
                     <label>User Name</label>
                 </div>
-                <div class="input-field col s4">
+                <div class="input-field col s6">
                     <select id="cuisine_name" name="cuisine_name">
                         <option value="None" disabled selected>Search by Cuisine</option>
                         {% for x in cuisine %}
@@ -30,7 +30,7 @@
                     </select>
                     <label>Cuisine Type</label>
                 </div>
-                <div class="col s4 center">
+                <div class="col s12 center">
                     <button class="btn" type="submit">Search Recipes</button>
                 </div>
             </div>

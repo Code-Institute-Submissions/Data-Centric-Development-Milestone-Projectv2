@@ -11,7 +11,7 @@
     <div class="row">
         <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method="POST" class="col-sm-12" name="recipeform" id="recipeform">
             <div class="row">
-                <div class="input-field col s4">
+                <div class="input-field col s6 l4">
                     <select id="cuisine" name="cuisine_name">
                         <option value="" disabled selected>Choose Cuisine Type</option>
                         {% for cui in cuisine %}
@@ -24,12 +24,12 @@
                     </select>
                     <label>Cuisine Type</label>
                 </div>
-                <div class="input-field col s4">
+                <div class="input-field col s6 l4">
                     <label>Recipe Name</label>
                     <input type="text" id="recipe_name" name="recipe_name" value="{{recipe.recipe_name}}">
                 </div>
                
-                <div class="input-field col s4">
+                <div class="input-field col s12 l4">
                     <select id="user_name" name="user_name">
                         <option value="" disabled selected>Choose User</option>
                         {% for x in user %}
@@ -58,7 +58,7 @@
                             <div class="input-field col s6">
                                 <input placeholder="Quantity" type="text" name = "ingredient_qty_{{x}}" id="ingredient_qty_{{x}}" value="{{ingredient_qty_list[x - 1]}}">
                                 {% if x == 1 %}
-                                <label class="active" for="">Quantity or Units (eg. 3 Cups, 2 Tbsp)</label>
+                                <label class="active" for="">Quantity(eg. 3 Cups)</label>
                                 {% endif %}
                             </div>
                         </div>
@@ -77,7 +77,7 @@
             </div>
             <div class="row">
                  <div class="input-field col s10 offset-s1">
-                    <label>Recipe Image Link (You can upload images to websites like <a href="http://tinypic.com/">tinypic.com</a>)</label>
+                    <label>Recipe Image Link (Upload images to <a href="http://tinypic.com/">tinypic.com</a>)</label>
                     <input placeholder="Example: http://i68.tinypic.com/2bdrlt.jpg" type="text" id="recipe_image" name="recipe_image" value="{{recipe.recipe_image}}">
                 </div>
             </div>
