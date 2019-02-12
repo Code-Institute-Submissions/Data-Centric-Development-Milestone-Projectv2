@@ -11,12 +11,30 @@ app.config["MONGO_URI"] = 'mongodb://root:password123@ds121295.mlab.com:21295/co
 
 mongo = PyMongo(app)
 
+RECIPES_PER_PAGE = 3
+
 @app.route('/')
 def index():
     return render_template('home.html', recipes = mongo.db.recipes.find())
+ 
+# BEFORE TRYING PAGINATION 
+# @app.route('/list_recipes')
+# def list_recipes():
+#     return render_template('listrecipes.html', recipes = mongo.db.recipes.find())
 
-@app.route('/list_recipes')
+@app.route('/list_recipes', methods=['GET'])
 def list_recipes():
+    #Pagination - To be figured out
+    # recipes = mongo.db.recipes
+    
+    # start_from = int(request.args['start_from'])
+    # limit = int(request.args['limit'])
+    
+    # first_id = recipes.find()
+    # last_id = first_id[start_from]['_id']
+    
+    
+    # recipes = mongo.db.recipes.find().limit(RECIPES_PER_PAGE)
     return render_template('listrecipes.html', recipes = mongo.db.recipes.find())
     
 @app.route('/show_recipe/<recipe_id>/')
@@ -99,8 +117,6 @@ def edit_recipe(recipe_id):
 @app.route('/update_recipe/<recipe_id>/', methods=['POST', 'GET'])
 def update_recipe(recipe_id):
 
-    # maybe delete contents of recipe then add all like below?
-    
     if request.method == 'POST':
         result = request.form.to_dict()
         allergen_result = request.form.getlist('allergens')
@@ -111,11 +127,14 @@ def update_recipe(recipe_id):
         result['allergens'] = ', '.join(allergen_result)
         recipes = mongo.db.recipes
         recipes.replace_one({"_id": ObjectId(recipe_id)}, result)
-        return redirect(url_for('list_recipes'))
+        return redirect(url_for('show_recipe', recipe_id = recipe_id))
         #Figure out way to redirect back to same recipe ID
-        
         # Something like: return redirect(url_for('show_recipe', recipe_id = this._id))
     
+@app.route('/delete_recipe/<recipe_id>', methods=['POST', 'GET'])
+def delete_recipe(recipe_id):
+    mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
+    return redirect(url_for('list_recipes'))
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), port=int(os.environ.get('PORT')), debug=True)
