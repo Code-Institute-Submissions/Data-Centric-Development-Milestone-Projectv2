@@ -11,7 +11,7 @@ app.config["MONGO_URI"] = 'mongodb://root:password123@ds121295.mlab.com:21295/co
 
 mongo = PyMongo(app)
 
-RECIPES_PER_PAGE = 3
+RECIPES_PER_PAGE = 3 #Part of Pagination attempt
 
 @app.route('/')
 def index():
@@ -128,8 +128,7 @@ def update_recipe(recipe_id):
         recipes = mongo.db.recipes
         recipes.replace_one({"_id": ObjectId(recipe_id)}, result)
         return redirect(url_for('show_recipe', recipe_id = recipe_id))
-        #Figure out way to redirect back to same recipe ID
-        # Something like: return redirect(url_for('show_recipe', recipe_id = this._id))
+        
     
 @app.route('/delete_recipe/<recipe_id>', methods=['POST', 'GET'])
 def delete_recipe(recipe_id):
