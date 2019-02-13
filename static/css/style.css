@@ -29,6 +29,10 @@
     padding-top: 0 !important;
 }
 
+.indicators {
+    display:none;
+}
+
 /* CSS code from Materialize for sticky footer */
 body {
     display: flex;
