@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col s6">
             <div class="col s12 recipe-image">
-                <img class="z-depth-3" src="{{ recipe.recipe_image }}"></img>
+                <img class="z-depth-3" src="{{ recipe.recipe_image }}" alt="{{recipe.recipe_name}}"></img>
                 <blockquote>Recipe added by {{recipe.user_name}}</blockquote>
                 {% if recipe.allergens %}
                 <blockquote>Allergens: {{recipe.allergens}}</blockquote>

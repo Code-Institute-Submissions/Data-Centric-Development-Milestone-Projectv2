@@ -16,9 +16,9 @@
                 <div class="card-image">
                     <!-- <img src="https://source.unsplash.com/400x300/?recipe,food"> -->
                     {% if recipe.recipe_image %}
-                    <img src="{{ recipe.recipe_image }}">
+                    <img src="{{ recipe.recipe_image }}" alt="{{recipe.recipe_name}}">
                     {% else %}
-                    <img src="{{ url_for('static', filename='images/recipe.png') }}">
+                    <img src="{{ url_for('static', filename='images/recipe.png') }}" alt="{{recipe.recipe_name}}">
                     {% endif %}
                     <span class="card-title dark-background"> {{recipe.recipe_name}} </span>
                 </div>

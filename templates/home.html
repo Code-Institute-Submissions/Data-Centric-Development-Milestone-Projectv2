@@ -15,13 +15,13 @@
                 <a class="waves-effect waves-light  deep-purple btn">Show Recipes</a>
             </div>
             {% for recipe in recipes %}
-            <div class="carousel-item red white-text" href="#">
+            <div class="carousel-item red white-text">
                 <h2>{{ recipe.recipe_name }}</h2>
                 <p class="white-text">shared by {{ recipe.user_name }}</p>
                 {% if recipe.recipe_image %}
-                    <img src="{{ recipe.recipe_image }}">
+                    <img src="{{ recipe.recipe_image }}" alt="{{recipe.recipe_name}}">
                 {% else %}
-                    <img src="{{ url_for('static', filename='images/recipe.png') }}">
+                    <img src="{{ url_for('static', filename='images/recipe.png') }}" alt="{{recipe.recipe_name}}">
                 {% endif %}
             </div>
             {% endfor %}
