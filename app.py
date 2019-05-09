@@ -1,7 +1,6 @@
 import os
 from flask import Flask, render_template, redirect, url_for, request
 from flask_pymongo import PyMongo
-#from pymongo import MongoClient
 from bson import ObjectId
 
 app = Flask(__name__)
@@ -11,30 +10,14 @@ app.config["MONGO_URI"] = 'mongodb://root:password123@ds121295.mlab.com:21295/co
 
 mongo = PyMongo(app)
 
-RECIPES_PER_PAGE = 3 #Part of Pagination attempt
-
 @app.route('/')
 def index():
     return render_template('home.html', recipes = mongo.db.recipes.find())
- 
-# BEFORE TRYING PAGINATION 
-# @app.route('/list_recipes')
-# def list_recipes():
-#     return render_template('listrecipes.html', recipes = mongo.db.recipes.find())
+
 
 @app.route('/list_recipes', methods=['GET'])
 def list_recipes():
-    #Pagination - To be figured out
-    # recipes = mongo.db.recipes
     
-    # start_from = int(request.args['start_from'])
-    # limit = int(request.args['limit'])
-    
-    # first_id = recipes.find()
-    # last_id = first_id[start_from]['_id']
-    
-    
-    # recipes = mongo.db.recipes.find().limit(RECIPES_PER_PAGE)
     return render_template('listrecipes.html', recipes = mongo.db.recipes.find())
     
 @app.route('/show_recipe/<recipe_id>/')
