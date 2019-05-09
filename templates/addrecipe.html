@@ -12,7 +12,7 @@
         <form action="{{ url_for('insert_recipe') }}" method="POST" class="col-sm-12" name="recipeform" id="recipeform">
             <div class="row">
                 <div class="input-field col s6 l4">
-                    <select id="cuisine" name="cuisine_name">
+                    <select id="cuisine" name="cuisine_name" required>
                         <option value="" disabled selected>Choose Cuisine Type</option>
                         {% for cui in cuisine %}
                             <option value="{{cui.cuisine_name}}">{{cui.cuisine_name}}</option>
@@ -26,7 +26,7 @@
                 </div>
                
                 <div class="input-field col s12 l4">
-                    <select id="user_name" name="user_name">
+                    <select id="user_name" name="user_name" required>
                         <option value="" disabled selected>Choose User</option>
                         {% for x in user %}
                             <option value="{{x.user_name}}">{{x.user_name}}</option>
@@ -41,11 +41,11 @@
                 <div class="row ingredient">
                     <div class="col s10 ingredient-row offset-s1">
                         <div class="input-field col s6">
-                            <input placeholder="First Ingredient" type="text" name = "ingredient_1" id="ingredient_1">
+                            <input placeholder="First Ingredient" type="text" name = "ingredient_1" id="ingredient_1" required>
                             <label for="">List Ingredients</label>
                         </div>
                         <div class="input-field col s6">
-                            <input placeholder="Quantity" type="text" name = "ingredient_qty_1" id="ingredient_qty_1">
+                            <input placeholder="Quantity" type="text" name = "ingredient_qty_1" id="ingredient_qty_1" required>
                             <label class="active" for="">Quantity(eg. 3 Cups)</label>
                         </div>
                     </div>
@@ -70,13 +70,13 @@
             <div class="row">
                 <div class="col s10 offset-s1">
                     <label for="">Preparation Steps</label>
-                    <textarea placeholder="Press enter after each step to create a new line" class="materialize-textarea" name = "preparation" id="preparation" rows="5" cols="60"></textarea>
+                    <textarea placeholder="Press enter after each step to create a new line" class="materialize-textarea" name = "preparation" id="preparation" rows="5" cols="60" required></textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col s10 offset-s1">
                     <label for="">Recipe Description</label>
-                    <textarea placeholder="A short description of the Recipe" class="materialize-textarea" name = "description" id="description" rows="5" cols="60"></textarea>
+                    <textarea placeholder="A short description of the Recipe" class="materialize-textarea" name = "description" id="description" rows="5" cols="60" required></textarea>
                 </div>
             </div>
             <div class="row">
