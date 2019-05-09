@@ -93,7 +93,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col s4 offset-s4 center">
+                <div class="col s8 offset-s2 center">
                     <button class="btn" type="submit">Add Recipe</button>
                     <blockquote>Cuisine Type and User Name selection required before being able to Add Recipe</blockquote>
                 </div>
@@ -112,7 +112,7 @@
             count += 1;
             $( '.ingredient-list' ).append('<div class="row ingredient"></div>');
             $('.ingredient-list div:last-child').append('<div class="col s10 ingredient-row offset-s1"></div>')
-            $( '.ingredient-list div:last' ).append('<div class="input-field col s6"><input placeholder="Add Ingredient" name = "ingredient_'+count+'" id="ingredient_'+count+'" rows="1"></div> <div class="input-field col s6"><input placeholder="Add Quantity" name = "ingredient_qty_'+count+'" id="ingredient_qty_'+count+'" rows="1"></div></div>');
+            $( '.ingredient-list div:last' ).append('<div class="input-field col s6"><input placeholder="Add Ingredient" name = "ingredient_'+count+'" id="ingredient_'+count+'" rows="1" required></div> <div class="input-field col s6"><input placeholder="Add Quantity" name = "ingredient_qty_'+count+'" id="ingredient_qty_'+count+'" rows="1" required></div></div>');
             $('#ingredient_counter').text(parseInt(count));
             
         });
