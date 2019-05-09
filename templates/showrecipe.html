@@ -11,7 +11,11 @@
     <div class="row">
         <div class="col s6">
             <div class="col s12 recipe-image">
-                <img class="z-depth-3" src="{{ recipe.recipe_image }}" alt="{{recipe.recipe_name}}"></img>
+                {% if recipe.recipe_image %}
+                <img class="z-depth-3" src="{{ recipe.recipe_image }}" alt="{{recipe.recipe_name}}">
+                {% else %}
+                <img class="z-depth-3" src="{{ url_for('static', filename='images/recipe.png') }}" alt="{{recipe.recipe_name}}">
+                {% endif %}
                 <blockquote>Recipe added by {{recipe.user_name}}</blockquote>
                 {% if recipe.allergens %}
                 <blockquote>Allergens: {{recipe.allergens}}</blockquote>

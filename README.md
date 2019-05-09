@@ -133,6 +133,7 @@ Testing conducted were as follows:
 9. Bugs discovered during testing:
 - Add Recipe page - You can add a recipe without entering any information
 - Edit Recipe page - You can edit a recipe and leave fields blank that should be required
+- Show Recipe Page - Recipe default image (if no image was added during recipe creation) doesn't display, broken image icon shows
 
 
 #
