@@ -140,9 +140,20 @@ Testing conducted were as follows:
 
 ### Deployment
 
+During the development phase and deployment, the project used MongoDB hosted on [mLab](https://mlab.com)
 
 To desploy the project to Heroku, the following steps were taken:
 
+- Created the application on Heroku and called it: jan-data-centric-dev-project
+- Copied the MONGO_URI from the app.py and went to Settings on Heroku, then to Reveal Config Vars and entered the values there
+- Changed the MONGO_URI entry in app.py to the following:
+    - ```app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb://localhost')```
+- On my development environment, installed the webserver that is required by Heroku
+    - ```pip install gunicorn```
+- Create a Procfile file in the root of the project and add the following line to the file:
+    - ```web: gunicorn app:app```
+- Capture all the installed applications into the requirements.txt file:
+    - ```pip freeze > requirements.txt```
 
 
 ### Credits
