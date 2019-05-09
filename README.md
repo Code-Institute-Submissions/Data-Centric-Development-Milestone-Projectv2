@@ -104,6 +104,7 @@ Testing conducted were as follows:
 - Opening up a recipe displays the recipe image, name, description, ingedients, preparation steps, recipe creator name, allergens and recipe views
 - Clicking the 'Edit Recipe' button opens up the Edit Recipe page with the option to change the data of that recipe
 - Clicking on the "Delete Recipe" button opens up the prompt to confirm deletion of the recipe
+- Recipe Views increase every time the recipe is opened
 
 4. Add Recipe:
 - Cuisine Type, User Name and allergens pulls the correct information from the premade database selection options.
