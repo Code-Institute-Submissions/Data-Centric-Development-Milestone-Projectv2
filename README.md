@@ -124,7 +124,13 @@ Testing conducted were as follows:
 8. Other:
 - Login and Register buttons not functioning as they aren't implemented yet
 
-9. Bugs discovered during testing:
+9. Browsers:
+- Tested site on both Chrome and Firefox web browsers
+
+10. Responsiveness
+- Used chrome developer tools to test site responsiveness in various display sizes
+
+11. Bugs discovered during testing:
 - Add Recipe page - You can add a recipe without entering any information
 - Edit Recipe page - You can edit a recipe and leave fields blank that should be required
 - Show Recipe Page - Recipe default image (if no image was added during recipe creation) doesn't display, broken image icon shows
