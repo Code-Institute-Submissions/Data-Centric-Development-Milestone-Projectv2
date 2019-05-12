@@ -1,11 +1,5 @@
 
 
-Installed Flask, flask-pymongo
-
-
-https://stackoverflow.com/questions/21938788/jquery-function-before-form-submission
-
-
 # Recipe Trove - Data Centric Development Project
 
 The Recipe Trove website provides users the option to upload their favorite recipes on the website which includes ingredients and instructions in preparing them.
@@ -154,17 +148,27 @@ To desploy the project to Heroku, the following steps were taken:
     - ```web: gunicorn app:app```
 - Capture all the installed applications into the requirements.txt file:
     - ```pip freeze > requirements.txt```
+- Sync the changed files to GitHub before being deployed to Heroku:
+    - ```git add .```
+    - ```git commit -m "Changes made for Heroku deployment"```
+    - ```git push```
+- On the heroku app dashboard, opened the 'Deploy' tab and selected GitHub under Deployment Method
+- In the 'Connect to GitHub' area underneath the Deployment Method, search for the github repository matching the project
+- Click the connect button on the correct project
+- In the 'Manual Deployment' section, clicked on the 'Deploy Branch' button and enabled automatic deployment
 
 
 ### Credits
 
 **Content**
-
+- Content is original and dummy entries created to display recipes and test website 
 
 **Media** 
-
+- All images are taken from Google image search by filtering for images with reuse rights
 
 **Code**
-
+Used the following resource for ideas on how to initiate a jquery function before form submission
+- [Stackoverflow](https://stackoverflow.com/questions/21938788/jquery-function-before-form-submission)
 
 **Inspiration**
+- Code Institute for providing the knowledge and challenge in creating this project.
